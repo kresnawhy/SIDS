@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -14,7 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.citizen.index');
+        $users = User::orderBy('id', 'ASC')->get();
+
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -35,7 +40,44 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'          => 'required|string',
+            'NIK'           => 'required|string|size:16',
+            'birth_place'   => 'required|string',
+            'birth_date'    => 'required|date',
+            'religion'      => 'required|string',
+            'gender'        => 'required|string',
+            'occupation'    => 'required|string',
+            'home_block'    => 'required|string|size:2',
+            'home_number'   => 'required|string|size:2',
+            'KTP'           => 'required|image|mimes:png,jpeg,jpg',
+            'email'         => 'required|string|email|max:255',
+            'password'      => 'required|string|min:8'
+        ]);
+
+        if ($request->hasFile('KTP')) {
+            $file = $request->file('KTP');
+            $image = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/ktp', $image);
+        }
+
+        User::create([
+            'name'          => $request->name,
+            'NIK'           => $request->NIK,
+            'birth_place'   => $request->birth_place,
+            'birth_date'    => $request->birth_date,
+            'religion'      => $request->religion,
+            'gender'        => $request->gender,
+            'occupation'    => $request->occupation,
+            'home_block'    => $request->home_block,
+            'home_number'   => $request->home_number,
+            'KTP'           => $image,
+            'email'         => $request->email,
+            'password'      => $request->password,
+            'old_password'  => $request->password,
+        ]);
+
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -46,7 +88,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('admin.user.show', compact('user'));
     }
 
     /**
@@ -57,7 +101,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -69,7 +115,44 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'          => 'required|string',
+            'NIK'           => 'required|string|size:16',
+            'birth_place'   => 'required|string',
+            'birth_date'    => 'required|date',
+            'religion'      => 'required|string',
+            'gender'        => 'required|string',
+            'occupation'    => 'required|string',
+            'home_block'    => 'required|string|size:2',
+            'home_number'   => 'required|string|size:2',
+            'KTP'           => 'required|image|mimes:png,jpeg,jpg',
+            'email'         => 'required|string|email|max:255',
+            'password'      => 'required|string|min:8'
+        ]);
+
+        if ($request->hasFile('KTP')) {
+            $file = $request->file('KTP');
+            $image = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/ktp', $image);
+        }
+
+        User::whereId($id)->update([
+            'name'          => $request->name,
+            'NIK'           => $request->NIK,
+            'birth_place'   => $request->birth_place,
+            'birth_date'    => $request->birth_date,
+            'religion'      => $request->religion,
+            'gender'        => $request->gender,
+            'occupation'    => $request->occupation,
+            'home_block'    => $request->home_block,
+            'home_number'   => $request->home_number,
+            'KTP'           => $image,
+            'email'         => $request->email,
+            'password'      => $request->password,
+            'old_password'  => $request->password,
+        ]);
+
+        return redirect()->route('user.index')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -80,6 +163,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 }

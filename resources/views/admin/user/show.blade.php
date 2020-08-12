@@ -17,15 +17,15 @@
                             <div class="profile-widget-items">
                                 <div class="profile-widget-item">
                                     <div class="profile-widget-item-label">Nama</div>
-                                    <div class="profile-widget-item-value">Wahyu Kresna Rachmadika</div>
+                                    <div class="profile-widget-item-value">{{ $user->name }}</div>
                                 </div>
                                 <div class="profile-widget-item">
                                     <div class="profile-widget-item-label">Blok Rumah</div>
-                                    <div class="profile-widget-item-value">C7</div>
+                                    <div class="profile-widget-item-value">{{ $user->home_block }}</div>
                                 </div>
                                 <div class="profile-widget-item">
                                     <div class="profile-widget-item-label">Nomor Rumah</div>
-                                    <div class="profile-widget-item-value">12</div>
+                                    <div class="profile-widget-item-value">{{ $user->home_number }}</div>
                                 </div>
                             </div>
                         </div>
@@ -35,31 +35,31 @@
                                     <div class="row">
                                         <div class="form-group col-md-6 col-12">
                                             <label>NIK</label>
-                                            <input type="text" class="form-control-plaintext" value="3509212208000007" readonly>
+                                            <input type="text" class="form-control-plaintext" value="{{ $user->NIK }}" readonly>
                                         </div>
                                         <div class="form-group col-md-6 col-12">
                                             <label>Jenis Kelamin</label>
-                                            <input type="text" class="form-control-plaintext" value="Laki-laki" readonly>
+                                            <input type="text" class="form-control-plaintext" value="{{ $user->gender }}" readonly>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-6 col-12">
                                             <label>Tempat Lahir</label>
-                                            <input type="text" class="form-control-plaintext" value="Sidoarjo" readonly>
+                                            <input type="text" class="form-control-plaintext" value="{{ $user->birth_place }}" readonly>
                                         </div>
                                         <div class="form-group col-md-6 col-12">
                                             <label>Tanggal Lahir</label>
-                                            <input type="text" class="form-control-plaintext" value="22 Agustus 2000" readonly>
+                                            <input type="text" class="form-control-plaintext" value="{{ $user->birth_date }}" readonly>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-6 col-12">
                                             <label>Agama</label>
-                                            <input type="text" class="form-control-plaintext" value="Islam" readonly>
+                                            <input type="text" class="form-control-plaintext" value="{{ $user->religion }}" readonly>
                                         </div>
                                         <div class="form-group col-md-6 col-12">
                                             <label>Pekerjaan</label>
-                                            <input type="text" class="form-control-plaintext" value="Pelajar" readonly>
+                                            <input type="text" class="form-control-plaintext" value="{{ $user->occupation }}" readonly>
                                         </div>
                                     </div>
                                 </div>

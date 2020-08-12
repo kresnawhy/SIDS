@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Citizen;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,6 +9,6 @@ class LocationController extends Controller
 {
     public function index()
     {
-        return view('citizen.location');
+        return view('user.location');
     }
 }

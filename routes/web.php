@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index')->name('welcome');
 
-Route::get('/admin/show', function () {
-    return view('admin.citizen.show');
-});
+Route::get('/detail/{id}', 'WelcomeController@show')->name('detail');
 
 Auth::routes([
     'register' => false,
@@ -35,12 +31,8 @@ Route::group(['middleware' => 'admin', 'namespace' => 'Admin', 'prefix' => 'admi
     Route::resource('letter', 'LetterController');
 });
 
-Route::group(['middleware' => 'auth', 'namespace' => 'Citizen'], function () {
+Route::group(['middleware' => 'auth', 'namespace' => 'User'], function () {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/letter', 'LetterController@index')->name('letter');
     Route::get('/location', 'LocationController@index')->name('location');
-});
-
-Route::get('/detail', function () {
-    return view('detail');
 });

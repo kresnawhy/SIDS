@@ -17,15 +17,15 @@
                             <div class="profile-widget-items">
                                 <div class="profile-widget-item">
                                     <div class="profile-widget-item-label">Nama</div>
-                                    <div class="profile-widget-item-value">Wahyu Kresna Rachmadika</div>
+                                    <div class="profile-widget-item-value">{{ $user->name }}</div>
                                 </div>
                                 <div class="profile-widget-item">
                                     <div class="profile-widget-item-label">Blok</div>
-                                    <div class="profile-widget-item-value">C7</div>
+                                    <div class="profile-widget-item-value">{{ $user->home_block }}</div>
                                 </div>
                                 <div class="profile-widget-item">
                                     <div class="profile-widget-item-label">Nomor</div>
-                                    <div class="profile-widget-item-value">12</div>
+                                    <div class="profile-widget-item-value">{{ $user->home_number }}</div>
                                 </div>
                             </div>
                         </div>

@@ -11,18 +11,32 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Tambah Lokasi</h4>
+                            <h4>Ajukan Surat</h4>
                         </div>
-                        <div class="card-body">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible show fade">
+                                <div class="alert-body">
+                                    <button class="close" data-dismiss="alert">
+                                        <span>&times;</span>
+                                    </button>
                                     <ul>
                                         @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
                                         @endforeach
                                     </ul>
-                                </div><br />
-                            @endif
+                                </div>
+                            </div>
+                        @elseif(session()->get('success'))
+                            <div class="alert alert-success alert-dismissible show fade">
+                                <div class="alert-body">
+                                    <button class="close" data-dismiss="alert">
+                                        <span>&times;</span>
+                                    </button>
+                                    {{ session()->get('success') }}
+                                </div>
+                            </div>
+                        @endif
+                        <div class="card-body">
                             <form action="" method="POST">
                                 @csrf
                                 <div class="form-group row">
@@ -32,9 +46,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-12">Kunjungan</label>
+                                    <label class="col-form-label col-12">Deskripsi</label>
                                     <div class="col-12">
-                                        <input type="text" class="form-control" name="location" required>
+                                        <textarea class="form-control" name="description" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -50,7 +64,7 @@
                 <div class="col-lg-8 col-md-6 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Riwayat Lokasi</h4>
+                            <h4>Riwayat Pengajuan Surat</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -61,7 +75,8 @@
                                             #
                                         </th>
                                         <th>Tanggal</th>
-                                        <th>Kunjungan</th>
+                                        <th>Deskripsi</th>
+                                        <th>Status</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -70,7 +85,8 @@
                                             1
                                         </td>
                                         <td>22 Agustus 2000</td>
-                                        <td>Jember</td>
+                                        <td>Kebutuhan mendaftar beasiswa</td>
+                                        <td><span class="badge badge-danger">Menunggu</span></td>
                                     </tr>
                                     </tbody>
                                 </table>

@@ -9,6 +9,20 @@
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible show fade">
+                            <div class="alert-body">
+                                <button class="close" data-dismiss="alert">
+                                    <span>&times;</span>
+                                </button>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
                     <div class="card">
                         <div class="card-header">
                             <h4>Data Penduduk</h4>
@@ -28,15 +42,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($users as $user)
                                     <tr>
                                         <td class="text-center">
-                                            1
+                                            {{ $user->id }}
                                         </td>
-                                        <td>Wahyu Kresna Rachmadika</td>
-                                        <td>C7</td>
-                                        <td>12</td>
-                                        <td><a href="{{ url('/detail') }}" class="btn btn-primary">Detail</a></td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->home_block }}</td>
+                                        <td>{{ $user->home_number }}</td>
+                                        <td><a href="{{ route('detail', $user->id) }}" class="btn btn-primary">Detail</a></td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
