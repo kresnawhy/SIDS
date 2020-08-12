@@ -40,4 +40,9 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function locations()
+    {
+        return $this->hasMany(Location::class, 'user_id', 'id');
+    }
 }

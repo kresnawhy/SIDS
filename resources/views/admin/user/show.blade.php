@@ -70,7 +70,20 @@
             </div>
 
             <h2 class="section-title">Riwayat Lokasi</h2>
-
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible show fade">
+                    <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -84,28 +97,18 @@
                                         </th>
                                         <th>Tanggal</th>
                                         <th>Kunjungan</th>
-                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($locations as $id => $location)
                                     <tr>
                                         <td class="text-center">
-                                            1
+                                            {{ $id+1 }}
                                         </td>
-                                        <td>22 Agustus 2000</td>
-                                        <td>Jember</td>
-                                        <td>
-                                            <div class="row">
-                                                <a class="ml-1">
-                                                    <form action="" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger" type="submit">Delete</button>
-                                                    </form>
-                                                </a>
-                                            </div>
-                                        </td>
+                                        <td>{{ $location->date }}</td>
+                                        <td>{{ $location->destination }}</td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

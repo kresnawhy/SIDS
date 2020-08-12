@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Location;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -89,8 +90,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+        $locations = $user->locations()->get();
 
-        return view('admin.user.show', compact('user'));
+        return view('admin.user.show', compact('user', 'locations'));
     }
 
     /**

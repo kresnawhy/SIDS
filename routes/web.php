@@ -35,4 +35,5 @@ Route::group(['middleware' => 'auth', 'namespace' => 'User'], function () {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/letter', 'LetterController@index')->name('letter');
     Route::get('/location', 'LocationController@index')->name('location');
+    Route::post('/location', 'LocationController@store')->name('location.store');
 });

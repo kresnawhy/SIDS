@@ -37,7 +37,7 @@
                             </div>
                         @endif
                         <div class="card-body">
-                            <form action="" method="POST">
+                            <form action="{{ route('location.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-form-label col-12">Tanggal</label>
@@ -48,7 +48,7 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-12">Kunjungan</label>
                                     <div class="col-12">
-                                        <input type="text" class="form-control" name="location" required>
+                                        <input type="text" class="form-control" name="destination" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -79,13 +79,15 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($locations as $id => $location)
                                     <tr>
                                         <td class="text-center">
-                                            1
+                                            {{ $id+1 }}
                                         </td>
-                                        <td>22 Agustus 2000</td>
-                                        <td>Jember</td>
+                                        <td>{{ $location->date }}</td>
+                                        <td>{{ $location->destination }}</td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
