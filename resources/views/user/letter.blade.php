@@ -37,16 +37,10 @@
                             </div>
                         @endif
                         <div class="card-body">
-                            <form action="" method="POST">
+                            <form action="{{ route('letter.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group row">
-                                    <label class="col-form-label col-12">Tanggal</label>
-                                    <div class="col-12">
-                                        <input type="date" class="form-control" name="date" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-12">Deskripsi</label>
+                                    <label class="col-form-label col-12">Keperluan</label>
                                     <div class="col-12">
                                         <textarea class="form-control" name="description" required></textarea>
                                     </div>
@@ -75,19 +69,25 @@
                                             #
                                         </th>
                                         <th>Tanggal</th>
-                                        <th>Deskripsi</th>
+                                        <th>Keperluan</th>
                                         <th>Status</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="text-center">
-                                            1
-                                        </td>
-                                        <td>22 Agustus 2000</td>
-                                        <td>Kebutuhan mendaftar beasiswa</td>
-                                        <td><span class="badge badge-danger">Menunggu</span></td>
-                                    </tr>
+                                    @foreach($letters as $id => $letter)
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ $id+1 }}
+                                            </td>
+                                            <td>{{ $letter->created_at }}</td>
+                                            <td>{{ $letter->description }}</td>
+                                            @if($letter->status !== 1)
+                                            <td><span class="badge badge-danger">Menunggu</span></td>
+                                            @elseif($letter->status == 1)
+                                            <td><a class="badge badge-success" href="{{ route('letter.print', $letter->id) }}">Disetujui</a></td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

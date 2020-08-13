@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Location::class, 'user_id', 'id');
     }
+
+    public function letters()
+    {
+        return $this->hasMany(Letter::class, 'user_id', 'id');
+    }
 }

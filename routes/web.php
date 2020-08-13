@@ -34,6 +34,8 @@ Route::group(['middleware' => 'admin', 'namespace' => 'Admin', 'prefix' => 'admi
 Route::group(['middleware' => 'auth', 'namespace' => 'User'], function () {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::get('/letter', 'LetterController@index')->name('letter');
+    Route::post('/letter', 'LetterController@store')->name('letter.store');
+    Route::get('/letter/{letter}', 'LetterController@show')->name('letter.print');
     Route::get('/location', 'LocationController@index')->name('location');
     Route::post('/location', 'LocationController@store')->name('location.store');
 });

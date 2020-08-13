@@ -84,7 +84,7 @@
                                         <td class="text-center">
                                             {{ $id+1 }}
                                         </td>
-                                        <td>{{ $location->date }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($location->date)->translatedFormat('j F Y') }}</td>
                                         <td>{{ $location->destination }}</td>
                                     </tr>
                                     @endforeach

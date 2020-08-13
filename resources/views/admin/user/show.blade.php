@@ -49,7 +49,7 @@
                                         </div>
                                         <div class="form-group col-md-6 col-12">
                                             <label>Tanggal Lahir</label>
-                                            <input type="text" class="form-control-plaintext" value="{{ $user->birth_date }}" readonly>
+                                            <input type="text" class="form-control-plaintext" value="{{ \Carbon\Carbon::parse($user->birth_date)->translatedFormat('j F Y') }}" readonly>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -105,7 +105,7 @@
                                         <td class="text-center">
                                             {{ $id+1 }}
                                         </td>
-                                        <td>{{ $location->date }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($location->date)->translatedFormat('j F Y') }}</td>
                                         <td>{{ $location->destination }}</td>
                                     </tr>
                                     @endforeach

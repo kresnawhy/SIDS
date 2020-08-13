@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="form-group col-md-6 col-12">
                                             <label>Tanggal Lahir</label>
-                                            <input type="text" class="form-control-plaintext" value="{{ Auth::user()->birth_date }}" readonly>
+                                            <input type="text" class="form-control-plaintext" value="{{ \Carbon\Carbon::parse(Auth::user()->birth_date)->translatedFormat('j F Y') }}" readonly>
                                         </div>
                                     </div>
                                     <div class="row">

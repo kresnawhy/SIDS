@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Letter;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class LetterController extends Controller
@@ -14,7 +16,9 @@ class LetterController extends Controller
      */
     public function index()
     {
-        return view('admin.letter.index');
+        $letters = Letter::orderBy('id', 'ASC')->get();
+
+        return view('admin.letter.index', compact('letters'));
     }
 
     /**
@@ -46,7 +50,13 @@ class LetterController extends Controller
      */
     public function show($id)
     {
-        //
+        $letter = Letter::findOrFail($id);
+
+        if ($letter->status !== 0) {
+            return view('admin.letter.pdf', compact('letter'));
+        } else {
+            return abort(404);
+        }
     }
 
     /**
@@ -57,7 +67,7 @@ class LetterController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -69,7 +79,11 @@ class LetterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $letter = Letter::findOrFail($id);
+        $letter->status = 1;
+        $letter->update();
+
+        return redirect()->back()->with('success', 'Data berhasil diverifikasi');
     }
 
     /**
